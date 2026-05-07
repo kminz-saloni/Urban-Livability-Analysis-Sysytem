@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { AlertCircle, MapPin, Shield, TrendingUp } from 'lucide-react'
+import { AlertCircle, Shield, TrendingUp } from 'lucide-react'
 
 interface TierData {
   tier: string

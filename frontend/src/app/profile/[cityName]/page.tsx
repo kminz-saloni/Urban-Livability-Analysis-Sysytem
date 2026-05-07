@@ -52,7 +52,9 @@ export default function CityProfilePage({ params }: PageProps) {
         </Link>
         <div className="bg-red-50 border border-red-200 rounded-lg p-6">
           <h2 className="text-lg font-heading font-bold text-red-900 mb-2">City Not Found</h2>
-          <p className="text-red-800">We couldn't find "{cityName}" in our database. Please check the city name and try again.</p>
+          <p className="text-red-800">
+            We couldn&apos;t find &quot;{cityName}&quot; in our database. Please check the city name and try again.
+          </p>
         </div>
       </motion.div>
     )
@@ -108,7 +110,7 @@ export default function CityProfilePage({ params }: PageProps) {
       <motion.div variants={itemVariants}>
         <h2 className="text-2xl font-heading font-bold text-primary mb-4">Category Breakdown</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
-          {CATEGORIES.map((cat, idx) => {
+          {CATEGORIES.map((cat) => {
             const score = city.category_scores?.[cat.name] || Math.round(50 + Math.random() * 40)
             const Icon = cat.icon
             return (

@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { BarChart3, MapPin, TrendingUp, AlertCircle, Shield, Droplets, Loader } from 'lucide-react'
+import { BarChart3, MapPin, TrendingUp, Shield } from 'lucide-react'
 import { useTopCities, useRankingStats, useInsights, useStressIndicators } from '@/hooks/useData'
 import KPICard from '@/components/dashboard/KPICard'
 import CityRankingChart from '@/components/dashboard/CityRankingChart'
@@ -42,7 +42,6 @@ export default function Dashboard() {
 
   // Get best, worst, and stats from real data
   const bestCity = topCities[0] || null
-  const worstCity = topCities[topCities.length - 1] || null
 
   return (
     <motion.div

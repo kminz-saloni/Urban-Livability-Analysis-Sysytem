@@ -28,7 +28,9 @@
     "echarts": "^5.4.0",
     "axios": "^1.6.0",
     "lucide-react": "^0.263.0",
-    "maplibre-gl": "^4.7.1"
+    "maplibre-gl": "^4.7.1",
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.105.3"
   },
   "devDependencies": {
     "@types/echarts": "^4.9.0",

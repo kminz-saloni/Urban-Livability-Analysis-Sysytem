@@ -25,6 +25,27 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 }
 
+const FALLBACK_LIVABILITY: GeoJSON.FeatureCollection = {
+  type: 'FeatureCollection',
+  features: [
+    {
+      type: 'Feature',
+      properties: { city: 'Kozhikode', state: 'Kerala', score: 78.5, rank: 1 },
+      geometry: { type: 'Point', coordinates: [75.7804, 11.2588] },
+    },
+    {
+      type: 'Feature',
+      properties: { city: 'Delhi', state: 'Delhi', score: 52.1, rank: 24 },
+      geometry: { type: 'Point', coordinates: [77.1025, 28.7041] },
+    },
+    {
+      type: 'Feature',
+      properties: { city: 'Patna', state: 'Bihar', score: 45.2, rank: 45 },
+      geometry: { type: 'Point', coordinates: [85.1376, 25.5941] },
+    },
+  ],
+}
+
 export default function MapPage() {
   const router = useRouter()
   const mapContainerRef = useRef<HTMLDivElement | null>(null)
@@ -37,27 +58,6 @@ export default function MapPage() {
     crime: false,
     water: false,
   })
-
-  const fallbackLivability: GeoJSON.FeatureCollection = {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        properties: { city: 'Kozhikode', state: 'Kerala', score: 78.5, rank: 1 },
-        geometry: { type: 'Point', coordinates: [75.7804, 11.2588] },
-      },
-      {
-        type: 'Feature',
-        properties: { city: 'Delhi', state: 'Delhi', score: 52.1, rank: 24 },
-        geometry: { type: 'Point', coordinates: [77.1025, 28.7041] },
-      },
-      {
-        type: 'Feature',
-        properties: { city: 'Patna', state: 'Bihar', score: 45.2, rank: 45 },
-        geometry: { type: 'Point', coordinates: [85.1376, 25.5941] },
-      },
-    ],
-  }
 
   useEffect(() => {
     const initMap = async () => {
@@ -74,7 +74,7 @@ export default function MapPage() {
       mapRef.current = map
 
       map.on('load', async () => {
-        let geojson: GeoJSON.FeatureCollection = fallbackLivability
+        let geojson: GeoJSON.FeatureCollection = FALLBACK_LIVABILITY
         try {
           const response = await api.getLivabilityMapData()
           if (response?.data?.features) {

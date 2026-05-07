@@ -39,7 +39,7 @@ interface TierStats {
 /**
  * Hook to fetch all rankings
  */
-export function useRankings(limit?: number) {
+export function useRankings() {
   const [data, setData] = useState<City[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)

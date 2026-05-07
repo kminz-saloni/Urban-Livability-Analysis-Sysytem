@@ -171,7 +171,6 @@ export default function ReportsPage() {
                     {report.date}
                   </div>
                   <div>{report.type}</div>
-                  <div>{report.size}</div>
                 </div>
               </div>
             </div>
