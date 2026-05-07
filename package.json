@@ -1,6 +1,7 @@
 {
-  "dependencies": {
-    "@supabase/ssr": "^0.10.2",
-    "@supabase/supabase-js": "^2.105.3"
-  }
+  "name": "urban-livability-analysis",
+  "version": "1.0.0",
+  "description": "Urban Livability Analysis System - Root package.json for reference only. Use frontend/package.json for frontend deployment.",
+  "private": true,
+  "devDependencies": {}
 }
