@@ -39,4 +39,27 @@ jobs:
           DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
           RESET_DATABASE: ${{ github.event.inputs.reset_database }}
         run: |
+          if [ -z "${DATABASE_URL}" ]; then
+            echo "ERROR: SUPABASE_DATABASE_URL secret is not set. Add it in repo settings -> Secrets and re-run workflow."
+            exit 1
+          fi
           python seed_from_datasets.py
+
+      - name: Optional smoke-test: call backend `/api/rankings`
+        working-directory: backend
+        env:
+          BACKEND_URL: ${{ secrets.SUPABASE_BACKEND_URL }}
+        run: |
+          if [ -z "${BACKEND_URL}" ]; then
+            echo "No SUPABASE_BACKEND_URL secret set; skipping smoke test."
+            exit 0
+          fi
+          echo "Calling ${BACKEND_URL}/api/rankings"
+          status=$(curl -s -o /dev/null -w "%{http_code}" "${BACKEND_URL}/api/rankings" || true)
+          echo "HTTP status: $status"
+          if [ "$status" -ge 200 ] && [ "$status" -lt 300 ]; then
+            echo "Smoke-test passed"
+          else
+            echo "Smoke-test failed: HTTP $status"
+            exit 1
+          fi
