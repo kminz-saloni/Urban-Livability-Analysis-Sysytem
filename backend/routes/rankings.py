@@ -43,7 +43,7 @@ async def get_ranking_insights(db: Session = Depends(get_db)):
     }
 
 
-@router.get("/", response_model=list)
+@router.get("", response_model=list)
 async def get_rankings(
     limit: int = Query(50, description="Number of rankings to return"),
     db: Session = Depends(get_db)

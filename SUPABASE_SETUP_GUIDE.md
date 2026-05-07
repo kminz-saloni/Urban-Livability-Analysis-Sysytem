@@ -142,8 +142,9 @@ alembic upgrade head
 ## Option 4: Use Supabase CLI
 
 ```bash
-# Install Supabase CLI
-npm install -g supabase
+# Install Supabase CLI (Homebrew)
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew install supabase/tap/supabase-beta
 
 # Login
 supabase login
@@ -157,6 +158,24 @@ supabase db push
 # Seed data
 supabase db seed
 ```
+
+Note:
+- `npm install -g supabase` is not supported by Supabase CLI.
+- If your local/devcontainer network cannot reach Supabase directly, use Option 5 below.
+
+## Option 5: Use GitHub Actions Seeder (Recommended for blocked networks)
+
+A workflow is available at `.github/workflows/seed_supabase.yml`.
+
+1. Add repository secret:
+  - Name: `SUPABASE_DATABASE_URL`
+  - Value: your Postgres connection string
+
+2. If your DB password has special characters (`/`, `&`, `?`, `@`), URL-encode it in the connection string.
+
+3. Run workflow:
+  - GitHub -> Actions -> `Seed Supabase Dataset` -> `Run workflow`
+  - Choose `reset_database=true` for full refresh, `false` for incremental seed.
 
 ## Recommended Next Steps
 

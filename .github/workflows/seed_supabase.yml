@@ -1,0 +1,42 @@
+name: Seed Supabase Dataset
+
+on:
+  workflow_dispatch:
+    inputs:
+      reset_database:
+        description: "Reset existing data before seeding"
+        required: true
+        default: "true"
+        type: choice
+        options:
+          - "true"
+          - "false"
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Seed Supabase from Datasets.zip
+        working-directory: backend
+        env:
+          DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+          RESET_DATABASE: ${{ github.event.inputs.reset_database }}
+        run: |
+          python seed_from_datasets.py

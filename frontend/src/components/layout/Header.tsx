@@ -1,6 +1,6 @@
 'use client'
 
-import { Bell, Search, User } from 'lucide-react'
+import { Bell, Search } from 'lucide-react'
 
 export default function Header() {
   return (
@@ -21,10 +21,6 @@ export default function Header() {
           <Bell size={20} className="text-secondary" />
         </button>
         <div className="w-px h-6 bg-border" />
-        <button className="flex items-center gap-2 px-4 py-2 hover:bg-surface rounded-lg transition-colors">
-          <User size={20} className="text-secondary" />
-          <span className="text-sm font-medium text-text">Admin</span>
-        </button>
       </div>
     </header>
   )

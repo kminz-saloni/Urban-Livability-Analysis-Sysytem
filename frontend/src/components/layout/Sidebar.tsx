@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { MapPin, BarChart3, Map, FileText, Settings } from 'lucide-react'
+import { MapPin, BarChart3, Map, FileText } from 'lucide-react'
 
 export default function Sidebar() {
   const menuItems = [
@@ -56,14 +56,6 @@ export default function Sidebar() {
           )
         })}
       </nav>
-
-      {/* Footer */}
-      <div className="p-4 border-t border-opacity-10 border-white">
-        <button className="flex items-center gap-3 w-full px-4 py-2 rounded-lg text-blue-100 hover:bg-secondary transition-colors">
-          <Settings size={20} />
-          <span className="text-sm font-medium">Settings</span>
-        </button>
-      </div>
     </aside>
   )
 }
