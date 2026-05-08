@@ -168,12 +168,17 @@ Note:
 A workflow is available at `.github/workflows/seed_supabase.yml`.
 
 1. Add repository secret:
-  - Name: `SUPABASE_DATABASE_URL`
-  - Value: your Postgres connection string
+  - Preferred name: `SUPABASE_POOLER_URL`
+  - Fallback name: `SUPABASE_DATABASE_URL`
+  - Value: your Postgres connection string from Supabase Dashboard, ideally the **Transaction pooler** URL
 
 2. If your DB password has special characters (`/`, `&`, `?`, `@`), URL-encode it in the connection string.
 
-3. Run workflow:
+3. Use the Supabase Dashboard connection string that is reachable from CI:
+  - Database -> Connection string -> choose **Transaction pooler** if available
+  - If you only have the direct DB host and CI cannot reach it, switch to the pooler URL
+
+4. Run workflow:
   - GitHub -> Actions -> `Seed Supabase Dataset` -> `Run workflow`
   - Choose `reset_database=true` for full refresh, `false` for incremental seed.
 

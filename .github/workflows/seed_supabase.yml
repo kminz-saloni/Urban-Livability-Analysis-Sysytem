@@ -32,11 +32,11 @@ jobs:
       - name: Seed Supabase from Datasets.zip
         working-directory: backend
         env:
-          DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+          DATABASE_URL: ${{ secrets.SUPABASE_POOLER_URL || secrets.SUPABASE_DATABASE_URL }}
           RESET_DATABASE: ${{ github.event.inputs.reset_database }}
         run: |
           if [ -z "${DATABASE_URL}" ]; then
-            echo "ERROR: SUPABASE_DATABASE_URL secret is not set. Add it in repo settings -> Secrets and re-run workflow."
+            echo "ERROR: Set SUPABASE_POOLER_URL (preferred) or SUPABASE_DATABASE_URL in repo settings -> Secrets and re-run workflow."
             exit 1
           fi
           python seed_from_datasets.py
