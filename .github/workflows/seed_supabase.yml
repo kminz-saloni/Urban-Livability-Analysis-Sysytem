@@ -7,10 +7,6 @@ on:
         description: "Reset existing data before seeding"
         required: true
         default: "true"
-        type: choice
-        options:
-          - "true"
-          - "false"
 
 jobs:
   seed:
@@ -45,7 +41,7 @@ jobs:
           fi
           python seed_from_datasets.py
 
-      - name: Optional smoke-test: call backend `/api/rankings`
+      - name: "Optional smoke-test: call backend `/api/rankings`"
         working-directory: backend
         env:
           BACKEND_URL: ${{ secrets.SUPABASE_BACKEND_URL }}
